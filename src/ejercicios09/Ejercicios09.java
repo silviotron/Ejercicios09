@@ -17,6 +17,8 @@ public class Ejercicios09 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //ejercicio01();
+        //ejercicio02();
         ejercicio03();
     }
     
@@ -49,27 +51,6 @@ public class Ejercicios09 {
         
     }
     
-    public static void ejercicio03mal(){
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Introduce una string: ");
-        StringBuilder sb1 = new StringBuilder(sc.nextLine());
-        System.out.print("Introduce una string: ");
-        StringBuilder sb2 = new StringBuilder(sc.nextLine());  
-        char[] a1 = new char[sb1.length()];
-        sb1.getChars(0, sb1.length(), a1, 0);
-        char[] a2 = new char[sb1.length()];
-        sb2.getChars(0, sb2.length(), a2, 0);
-        java.util.Arrays.sort(a1);
-        java.util.Arrays.sort(a2);
-        if(java.util.Arrays.equals(a1,a2)){
-            System.out.println("son anagrama");
-        }else{
-            System.out.println("no son anagrama");
-        }
-        
-        
-        
-    }
     public static void ejercicio03(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Introduce una string: ");
@@ -77,7 +58,7 @@ public class Ejercicios09 {
         System.out.print("Introduce una string: ");
         String s2 = sc.nextLine(); 
         
-        if(java.util.Arrays.equals(a1,a2)){
+        if(compareString(s1, s2)){
             System.out.println("son anagrama");
         }else{
             System.out.println("no son anagrama");
@@ -87,22 +68,25 @@ public class Ejercicios09 {
         
     }
     public static boolean compareString(String s1, String s2){
-        StringBuilder sb1 = new StringBuilder(s1);
-        StringBuilder sb2 = new StringBuilder(s2);
+        StringBuilder sb1 = ordenar(new StringBuilder(s1));
+        StringBuilder sb2 = ordenar(new StringBuilder(s2));
         
+        return sb1.compareTo(sb2) == 0;
         
-        return sb1.equals(sb2);
     }
     public static StringBuilder ordenar(StringBuilder sb){
         char aux;
         for (int i = 0; i < sb.length(); i++) {
-            for (int j = 1; j < sb.length(); j++) {
-                if(sb.charAt(i) < sb.charAt(j))
+            for (int j = 0; j < sb.length(); j++) {
+                if(sb.charAt(i) < sb.charAt(j)){
+                    aux = sb.charAt(i);
+                    sb.replace(i, i+1, Character.toString(sb.charAt(j)));
+                    sb.replace(j, j+1, Character.toString(aux));
+                }
                 
             }
             
         }
-        
         
         
         return sb;
